@@ -1,0 +1,25 @@
+<plugin name='activiti-shiro' version='0.1' grailsVersion='1.3.5  &gt; *'>
+  <author>Nicolas Bohorquez Gutierrez (@nickmancoi)</author>
+  <authorEmail>nicolas.bg@gmail.com</authorEmail>
+  <title>This plugin integrates Shiro Security to Activiti.</title>
+  <description>
+        Activiti plugin brings the power of bpmn to grails, Shiro security enables an elegant way to perform 
+authentication and authorization in your app, this plugin provides the basic glue necessary between them
+</description>
+  <documentation>https://bitbucket.org/Nickmancol/grails-activiti-shiro-security-plugin</documentation>
+  <resources>
+    <resource>BootStrap</resource>
+    <resource>BuildConfig</resource>
+    <resource>Config</resource>
+    <resource>DataSource</resource>
+    <resource>UrlMappings</resource>
+    <resource>org.grails.activiti.shirosecurity.SetAuthenticatedUsernameFilter</resource>
+    <resource>spring.resources</resource>
+    <resource>org.grails.activiti.shirosecurity.ShiroActivitiSessionService</resource>
+  </resources>
+  <dependencies>
+    <plugin name='shiro' version='1.1.3 &gt; *' />
+    <plugin name='activiti' version='5.5 &gt; *' />
+  </dependencies>
+  <behavior />
+</plugin>
