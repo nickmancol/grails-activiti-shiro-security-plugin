@@ -5,6 +5,7 @@
 
 package org.grails.activiti.shirosecurity
 
+import org.activiti.engine.impl.interceptor.Session;
 import org.activiti.engine.identity.Group
 import org.activiti.engine.identity.User
 import org.activiti.engine.identity.UserQuery

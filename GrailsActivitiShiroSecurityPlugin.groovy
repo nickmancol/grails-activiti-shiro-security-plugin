@@ -9,7 +9,7 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
  *
  * @author nickman
  */
-class ActivitiShiroGrailsPlugin {
+class GrailsActivitiShiroSecurityPlugin {
 
     def version = 0.1
     def grailsVersion = "1.3.5  > *"

@@ -5,6 +5,7 @@
 
 package org.grails.activiti.shirosecurity
 
+import org.activiti.engine.impl.interceptor.Session;
 import org.activiti.engine.identity.Group
 import org.activiti.engine.identity.GroupQuery
 import org.activiti.engine.impl.GroupQueryImpl
@@ -24,7 +25,7 @@ import grails.util.GrailsNameUtils as GNU
  *
  * @author nickman
  */
-class GroupManager extends org.activiti.engine.impl.persistence.entity.GroupManager {
+class GroupManager extends org.activiti.engine.impl.persistence.entity.GroupManager implements Session {
 	static final Log LOG = LogFactory.getLog(GroupManager.class)
 	
 	Group createNewGroup(String groupId) {
