@@ -9,9 +9,9 @@ import org.codehaus.groovy.grails.commons.ConfigurationHolder as CH
  *
  * @author nickman
  */
-class GrailsActivitiShiroSecurityPlugin {
+class ActivitiShiroGrailsPlugin {
 
-    def version = 0.1
+    def version = "0.1.1"
     def grailsVersion = "1.3.5  > *"
     // the other plugins this plugin depends on
     def dependsOn = [shiro: '1.1.3 > *', activiti: '5.5 > *']

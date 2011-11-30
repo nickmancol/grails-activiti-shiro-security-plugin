@@ -1,4 +1,4 @@
-<plugin name='activiti-shiro' version='0.1' grailsVersion='1.3.5  &gt; *'>
+<plugin name='activiti-shiro' version='0.1.1' grailsVersion='1.3.5  &gt; *'>
   <author>Nicolas Bohorquez Gutierrez (@nickmancoi)</author>
   <authorEmail>nicolas.bg@gmail.com</authorEmail>
   <title>This plugin integrates Shiro Security to Activiti.</title>
