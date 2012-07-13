@@ -1,11 +1,8 @@
-<<toc>>
-= Intro =
-
 Este plugin integra [[http://www.activiti.org/|Activiti]] con [[http://shiro.apache.org/|Shiro Security]] en una aplicación [[http://shiro.apache.org/|Grails]]. Se encuentra basado en el trabajo de Lim Chee Kin (plugins para [[http://code.google.com/p/grails-activiti-plugin/|Activiti]] y [[http://code.google.com/p/grails-activiti-spring-security-plugin/|Spring Security]]) y Peter Ledbrook (plugin para [[http://grails.org/plugin/shiro|Shiro]]). Esta licenciado bajo la Apache Software License v2.0.
 
-= Descripción =
+## Descripción
 
-== Modelos de dominio ==
+## Modelos de dominio
 Activiti usa un modelo de seguridad con tres entidades (User, Role y el enlace entre las dos), para ello define dos interfaces que deben ser implementadas por los modelos de dominio [[http://activiti.org/javadocs/org/activiti/engine/identity/User.html|User]] y [[http://activiti.org/javadocs/org/activiti/engine/identity/Group.html|Group]], la tercera es la asociacion m:n entre ellas (UserRole).
 
 El siguiente modelo es una ligera adaptación del modelo de dominio base de Spring Security: 
@@ -19,38 +16,34 @@ El plugin usa convenciones para generar las consultas dinámicas de permisos, po
 Activiti necesita realizar consultas basado en el nombre de usuario y el identificador de grupo por ello los atributos //id// de los modelos son de tipo String y deben ser mapeados de la siguiente manera:
 
 Para User
-{{{
-#!python
+```groovy
 
 static mapping = {
 		password column: '`password`'
 		id generator: 'uuid'
 	}
-}}}
+´´´
 
 Para Group
-{{{
-#!python
+```groovy
 
 static mapping = {
                 id generator: 'assigned'
 	}
-}}}
+´´´
 
 Para UserRole
-{{{
-#!python
+```groovy
 
 static mapping = {
 		id composite: ['shiroRole', 'shiroUser']
 		version false
 	}
-}}}
+´´´
 
 Lo que implica que los identificadores de los roles deben ser asignados, éstos identificadores deben contener los nombres de los roles usados en las expresiones de selección de psoibles usuarios durante la definición de tareas del proceso, el siguiente fragmento es extraído del proceso VacationRequest:
 
-{{{
-#!xml
+```xml
 
 <userTask id="initiateVacationRequest" activiti:formKey="/vacationRequest/create"
 			name="Initiate Vacation Request">
@@ -72,36 +65,33 @@ Lo que implica que los identificadores de los roles deben ser asignados, éstos 
 				</resourceAssignmentExpression>
 			</potentialOwner>
 		</userTask>
-}}}
+´´´
 
 debido a que el Activiti realiza la búsqueda de posibles usuarios basándose en las expresiones formales (//formalExpression//) del xml del proceso.
 
-== Inicialización ==
+## Instalación
+
+* Descargar el plugin desde [[https://bitbucket.org/Nickmancol/grails-activiti-shiro-security-plugin/downloads/grails-activiti-shiro-0.1.zip|Bitbucket]]
+
+* Instalar el plugin en la aplicacion
+```bash
+
+grails install-plugin /path/plgin/grails-activiti-shiro-0.1.zip
+´´´
+
+##Inicialización
 
 El plugin implementa las interfaces [[http://www.activiti.org/javadocs/org/activiti/engine/impl/persistence/entity/GroupManager.html| GroupManager]] y [[http://www.activiti.org/javadocs/org/activiti/engine/impl/persistence/entity/UserManager.html|UserManager]] de Activiti y configura el [[http://www.activiti.org/javadocs/org/activiti/engine/IdentityService.html|IdentityService]] para usar las implementaciones, usa las propiedades de //**Config.groovy**// (Ver instalación) para generar las consultas dinámicas.
 
 Es necesario registrar en la sesión de usuario el nombre de usuario para que Activiti busque los grupos y usuarios posibles para las tareas para ello el plugin implementa el método //**attachUsername2Session()**// del servicio **ShiroActivitiSessionService**, este servicio debe ser inyectado en la aplicación cliente y ser llamado una vez se inicie sesión, es posible realizar esto con un listener de Shiro o en el controlador de grails que realiza la autenticación de usuario.
 
-= Instalación =
-
-* Descargar el plugin desde [[https://bitbucket.org/Nickmancol/grails-activiti-shiro-security-plugin/downloads/grails-activiti-shiro-0.1.zip|Bitbucket]]
-
-* Instalar el plugin en la aplicacion
-{{{
-#!bash
-
-grails install-plugin /path/plgin/grails-activiti-shiro-0.1.zip
-}}}
-
 * Configurar los nombres de los modelos y propiedades usadas en //**Config.groovy**// 
-{{{
-#!python
-
+```groovy
 securityConfig.userLookup.usernamePropertyName = 'username' //username property
 securityConfig.userLookup.userDomainClassName = 'ShiroUser' //domain classname without package
 securityConfig.userLookup.authorityJoinClassName = 'UserRole' //domain classname without package
 securityConfig.userLookup.authority.className = 'ShiroRole' //domain classname without package
-}}}
+´´´
 
 * Declarar el servicio //**ShiroActivitiSessionService**// y llamar al método //**attachUsername2Session()**// una vez se haya iniciado sesión (probablemente en el //**AuthController**// de Shiro - linea 45 -)
 
@@ -109,8 +99,7 @@ securityConfig.userLookup.authority.className = 'ShiroRole' //domain classname w
 
 El plugin de Activiti para Grails contiene tres vistas de tareas (myTasks, unassignedTasks y allTasks), en esta última vista (en la versión 5.7 del plugin) por defecto no se presentan los usuarios que pueden ejecutar la tareas, para ello es necesario modificar en //**allTaskList.gsp**// el scriptlet que inicia en la linea 66 por el siguiente código:
 
-{{{
-#!java
+```java
 
 def users = []
 																		def userList=[:]
@@ -136,19 +125,11 @@ def users = []
 															          groupIds = groups?" ${groups.collect{it.name}}":""
 																				userList[user.username]="${user.username}${groupIds}"
 																			}
-}}}
+´´´
 
-= Scripts =
-
-= Tests =
-
-= Versiones =
-
-== 0.1 ==
+### Version 0.1
 29/11/2011 - Versión inicial
 
 * Implementada inicialización de IdentityService con GroupManager y UserManager
 * Implementado servicio de enlace de nombre de usuario en sesion
 * Prueba de integración con Grails-Activiti VacationRequest
-
-= ToDo =
