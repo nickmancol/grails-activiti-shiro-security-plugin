@@ -10,7 +10,7 @@ Activiti usa un modelo de seguridad con tres entidades (User, Role y el enlace e
 
 El siguiente modelo es una ligera adaptación del modelo de dominio base de Spring Security: 
 
-{{https://docs.google.com/drawings/pub?id=1hd15f_YZQGY__MTgHIvXE_LZQU7RiNfGYqmh_LWNn2g&w=490&h=594|Modelo}}
+https://docs.google.com/drawings/pub?id=1hd15f_YZQGY__MTgHIvXE_LZQU7RiNfGYqmh_LWNn2g&w=490&h=594
 
 No todos los atributos de las clases son necesarios (solmente los definidos por las interfaces de Activiti y en ShiroUser //passwordChangeRequiredOnNextLogon//). Éstas clases se pueden crear a partir del plugin de shiro para grails.
 
