@@ -12,7 +12,7 @@ El siguiente modelo es una ligera adaptación del modelo de dominio base de Spri
 
 https://docs.google.com/drawings/pub?id=1hd15f_YZQGY__MTgHIvXE_LZQU7RiNfGYqmh_LWNn2g&w=490&h=594
 
-No todos los atributos de las clases son necesarios (solmente los definidos por las interfaces de Activiti y en ShiroUser //passwordChangeRequiredOnNextLogon//). Éstas clases se pueden crear a partir del plugin de shiro para grails.
+No todos los atributos de las clases son necesarios (solamente los definidos por las interfaces de Activiti y en ShiroUser //passwordChangeRequiredOnNextLogon//). Éstas clases se pueden crear a partir del plugin de shiro para grails.
 
 El plugin usa convenciones para generar las consultas dinámicas de permisos, por tanto es neceserio que en **UserRole** los nombres de los atributos user y role conincidan con los nombres de las clases User y Role usadas, en este caso ShiroUser y ShiroRole.
 
