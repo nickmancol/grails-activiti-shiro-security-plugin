@@ -71,14 +71,14 @@ debido a que el Activiti realiza la búsqueda de posibles usuarios basándose en
 
 ## Instalación
 
-* Descargar el plugin desde [[https://bitbucket.org/Nickmancol/grails-activiti-shiro-security-plugin/downloads/grails-activiti-shiro-0.1.zip|Bitbucket]]
+* Descargar el plugin desde https://bitbucket.org/Nickmancol/grails-activiti-shiro-security-plugin/downloads/grails-activiti-shiro-0.1.1.zip
 
 * Instalar el plugin en la aplicacion
 ```
 grails install-plugin /path/plgin/grails-activiti-shiro-0.1.zip
 ```
 
-##Inicialización
+## Inicialización
 
 El plugin implementa las interfaces [[http://www.activiti.org/javadocs/org/activiti/engine/impl/persistence/entity/GroupManager.html| GroupManager]] y [[http://www.activiti.org/javadocs/org/activiti/engine/impl/persistence/entity/UserManager.html|UserManager]] de Activiti y configura el [[http://www.activiti.org/javadocs/org/activiti/engine/IdentityService.html|IdentityService]] para usar las implementaciones, usa las propiedades de //**Config.groovy**// (Ver instalación) para generar las consultas dinámicas.
 
